@@ -1,0 +1,22 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: chotepyare1234@gmail.com        # ← replace
+    password: zwywqgepalaqybfy         # ← use Gmail App Password
+
+
+logging:
+  file:
+    name: logs/application.log            # ← Spring Boot creates this automatically
+  level:
+    root: INFO
+
+app:
+  log:
+    file-path:  logs/application.log  # ← path to your log file
+  mail:
+    from: chotepyare1234@gmail.com                 # ← replace
+    to: somiljain.cse25@jecrc.ac.in           # ← replace
+  scan:
+    cron: "0 */1 * * * *"                      # every 5 minutes

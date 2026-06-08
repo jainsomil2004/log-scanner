@@ -1,0 +1,120 @@
+2026-06-07T17:16:24.964+05:30  INFO 7796 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : Starting LogScannerApplication using Java 22.0.2 with PID 7796 (/Users/somiljain/Downloads/log-scanner/target/classes started by somiljain in /Users/somiljain/Downloads/log-scanner)
+2026-06-07T17:16:24.966+05:30  INFO 7796 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-06-07T17:16:25.459+05:30  INFO 7796 --- [log-scanner] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-06-07T17:16:25.468+05:30  INFO 7796 --- [log-scanner] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-07T17:16:25.468+05:30  INFO 7796 --- [log-scanner] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-07T17:16:25.490+05:30  INFO 7796 --- [log-scanner] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 483 ms
+2026-06-07T17:16:25.693+05:30  INFO 7796 --- [log-scanner] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-06-07T17:16:25.700+05:30  INFO 7796 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : Started LogScannerApplication in 1.099 seconds (process running for 1.396)
+2026-06-07T17:17:58.088+05:30  INFO 7796 --- [log-scanner] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-07T17:17:58.097+05:30  INFO 7796 --- [log-scanner] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-07T17:17:59.455+05:30  INFO 7804 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : Starting LogScannerApplication using Java 22.0.2 with PID 7804 (/Users/somiljain/Downloads/log-scanner/target/classes started by somiljain in /Users/somiljain/Downloads/log-scanner)
+2026-06-07T17:17:59.456+05:30  INFO 7804 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-06-07T17:17:59.921+05:30  INFO 7804 --- [log-scanner] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-06-07T17:17:59.929+05:30  INFO 7804 --- [log-scanner] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-07T17:17:59.930+05:30  INFO 7804 --- [log-scanner] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-07T17:17:59.956+05:30  INFO 7804 --- [log-scanner] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 475 ms
+2026-06-07T17:18:00.174+05:30  INFO 7804 --- [log-scanner] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-06-07T17:18:00.179+05:30  INFO 7804 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : Started LogScannerApplication in 1.058 seconds (process running for 1.308)
+2026-06-07T17:20:00.032+05:30  INFO 7804 --- [log-scanner] [scheduling-1] c.logscanner.scheduler.LogScanScheduler  : Starting log scan for: logs/application.log
+2026-06-07T17:20:00.036+05:30  INFO 7804 --- [log-scanner] [scheduling-1] c.logscanner.service.LogScannerService   : Scanned [logs/application.log] — found 0 error(s)
+2026-06-07T17:20:00.038+05:30  INFO 7804 --- [log-scanner] [scheduling-1] com.logscanner.service.EmailService      : No errors found — skipping email.
+2026-06-07T17:24:59.995+05:30  INFO 7804 --- [log-scanner] [scheduling-1] c.logscanner.scheduler.LogScanScheduler  : Starting log scan for: logs/application.log
+2026-06-07T17:25:00.015+05:30  INFO 7804 --- [log-scanner] [scheduling-1] c.logscanner.service.LogScannerService   : Scanned [logs/application.log] — found 0 error(s)
+2026-06-07T17:25:00.016+05:30  INFO 7804 --- [log-scanner] [scheduling-1] com.logscanner.service.EmailService      : No errors found — skipping email.
+2026-06-07T17:35:00.024+05:30  INFO 7932 --- [log-scanner] [scheduling-1] c.logscanner.scheduler.LogScanScheduler  : Starting log scan for: logs/application.log
+2026-06-07T17:35:00.029+05:30  INFO 7932 --- [log-scanner] [scheduling-1] c.logscanner.service.LogScannerService   : Scanned [logs/application.log] — found 0 error(s)
+2026-06-07T17:35:00.030+05:30  INFO 7932 --- [log-scanner] [scheduling-1] com.logscanner.service.EmailService      : No errors found — skipping email.
+2026-06-07T17:35:52.682+05:30  INFO 7932 --- [log-scanner] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-07T17:35:52.689+05:30  INFO 7932 --- [log-scanner] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-07T17:35:54.047+05:30  INFO 7963 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : Starting LogScannerApplication using Java 22.0.2 with PID 7963 (/Users/somiljain/Downloads/log-scanner/target/classes started by somiljain in /Users/somiljain/Downloads/log-scanner)
+2026-06-07T17:35:54.048+05:30  INFO 7963 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-06-07T17:35:54.504+05:30  INFO 7963 --- [log-scanner] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-06-07T17:35:54.512+05:30  INFO 7963 --- [log-scanner] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-07T17:35:54.512+05:30  INFO 7963 --- [log-scanner] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-07T17:35:54.534+05:30  INFO 7963 --- [log-scanner] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 460 ms
+2026-06-07T17:35:54.735+05:30  INFO 7963 --- [log-scanner] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-06-07T17:35:54.740+05:30  INFO 7963 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : Started LogScannerApplication in 1.053 seconds (process running for 1.342)
+2026-06-07T17:36:40.001+05:30  INFO 7963 --- [log-scanner] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-07T17:36:40.013+05:30  INFO 7963 --- [log-scanner] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-07T17:36:41.590+05:30  INFO 7967 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : Starting LogScannerApplication using Java 22.0.2 with PID 7967 (/Users/somiljain/Downloads/log-scanner/target/classes started by somiljain in /Users/somiljain/Downloads/log-scanner)
+2026-06-07T17:36:41.592+05:30  INFO 7967 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-06-07T17:36:42.043+05:30  INFO 7967 --- [log-scanner] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-06-07T17:36:42.051+05:30  INFO 7967 --- [log-scanner] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-07T17:36:42.051+05:30  INFO 7967 --- [log-scanner] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-07T17:36:42.073+05:30  INFO 7967 --- [log-scanner] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 457 ms
+2026-06-07T17:36:42.272+05:30  INFO 7967 --- [log-scanner] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-06-07T17:36:42.278+05:30  INFO 7967 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : Started LogScannerApplication in 1.114 seconds (process running for 1.51)
+2026-06-07T17:37:00.017+05:30  INFO 7967 --- [log-scanner] [scheduling-1] c.logscanner.scheduler.LogScanScheduler  : Starting log scan for: logs/application.log
+2026-06-07T17:37:00.021+05:30  INFO 7967 --- [log-scanner] [scheduling-1] c.logscanner.service.LogScannerService   : Scanned [logs/application.log] — found 0 error(s)
+2026-06-07T17:37:00.022+05:30  INFO 7967 --- [log-scanner] [scheduling-1] com.logscanner.service.EmailService      : No errors found — skipping email.
+
+
+2026-06-07 09:00:01.123  INFO  com.myapp.Application - Application started successfully
+2026-06-07 09:00:02.456  INFO  com.myapp.UserService - Fetching user with ID: 1023
+2026-06-07 09:00:03.789  INFO  com.myapp.UserService - Connecting to database...
+2026-06-07 09:00:04.321  ERROR com.myapp.UserService - Failed to process user request
+java.lang.NullPointerException: Cannot invoke method getEmail() on null object reference
+    at com.myapp.UserService.processUser(UserService.java:45)
+    at com.myapp.UserService.getUserDetails(UserService.java:30)
+    at com.myapp.OrderController.placeOrder(OrderController.java:78)
+Caused by: java.lang.IllegalArgumentException: User object is null, cannot fetch email
+    at com.myapp.UserRepository.findUser(UserRepository.java:30)
+    at com.myapp.UserService.processUser(UserService.java:42)
+    ... 3 more
+2026-06-07 09:05:00.000  INFO  com.myapp.Application - Checking DB health...
+2026-06-07 09:05:01.111  ERROR com.myapp.DatabaseService - Cannot connect to database
+java.sql.SQLException: Connection refused to host: localhost:5432
+    at com.myapp.db.ConnectionPool.getConnection(ConnectionPool.java:22)
+    at com.myapp.db.DatabaseService.query(DatabaseService.java:58)
+Caused by: java.net.ConnectException: Connection refused: localhost/127.0.0.1:5432
+    at java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:184)
+    at com.myapp.db.ConnectionPool.getConnection(ConnectionPool.java:18)
+    ... 2 more
+2026-06-07 09:10:00.000  INFO  com.myapp.PaymentService - Initiating payment for order #5089
+2026-06-07 09:10:31.999  ERROR com.myapp.PaymentService - Payment processing failed
+java.io.IOException: Connection timed out to payment gateway
+    at com.myapp.PaymentService.charge(PaymentService.java:55)
+    at com.myapp.OrderController.checkout(OrderController.java:102)
+Caused by: java.net.SocketTimeoutException: Read timed out after 30000ms
+    at com.myapp.PaymentGateway.callAPI(PaymentGateway.java:88)
+    ... 4 more
+2026-06-07 09:15:00.000  INFO  com.myapp.DBService - Running scheduled DB health check
+2026-06-07 09:15:01.000  FATAL com.myapp.DBService - CRITICAL: Database has crashed!
+java.sql.SQLException: Too many connections - max pool size 100 exceeded
+    at com.myapp.db.DBPool.acquire(DBPool.java:15)
+    at com.myapp.db.DBPool.getConnection(DBPool.java:40)
+Caused by: java.lang.RuntimeException: Connection pool exhausted, no available connections
+    at com.myapp.db.DBPool.waitForConnection(DBPool.java:60)
+    at com.myapp.db.DBPool.acquire(DBPool.java:12)
+    ... 5 more
+2026-06-07 09:20:00.000  INFO  com.myapp.FileService - Reading config file: /etc/myapp/config.json
+2026-06-07 09:20:01.000  ERROR com.myapp.FileService - Config file could not be loaded
+java.io.FileNotFoundException: /etc/myapp/config.json (No such file or directory)
+    at java.io.FileInputStream.open(FileInputStream.java:195)
+    at com.myapp.FileService.loadConfig(FileService.java:28)
+Caused by: java.lang.RuntimeException: Missing required configuration file
+    at com.myapp.FileService.validatePath(FileService.java:20)
+    at com.myapp.FileService.loadConfig(FileService.java:25)
+    ... 2 more
+2026-06-07 09:25:00.000  INFO  com.myapp.Application - All services checked. Monitoring active.2026-06-07T17:37:48.742+05:30  INFO 7967 --- [log-scanner] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-07T17:37:48.754+05:30  INFO 7967 --- [log-scanner] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-07T17:37:50.087+05:30  INFO 7973 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : Starting LogScannerApplication using Java 22.0.2 with PID 7973 (/Users/somiljain/Downloads/log-scanner/target/classes started by somiljain in /Users/somiljain/Downloads/log-scanner)
+2026-06-07T17:37:50.088+05:30  INFO 7973 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-06-07T17:37:50.525+05:30  INFO 7973 --- [log-scanner] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-06-07T17:37:50.534+05:30  INFO 7973 --- [log-scanner] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-07T17:37:50.534+05:30  INFO 7973 --- [log-scanner] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-06-07T17:37:50.559+05:30  INFO 7973 --- [log-scanner] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 448 ms
+2026-06-07T17:37:50.758+05:30  INFO 7973 --- [log-scanner] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-06-07T17:37:50.764+05:30  INFO 7973 --- [log-scanner] [main] com.logscanner.LogScannerApplication     : Started LogScannerApplication in 1.014 seconds (process running for 1.259)
+2026-06-07T17:38:00.012+05:30  INFO 7973 --- [log-scanner] [scheduling-1] c.logscanner.scheduler.LogScanScheduler  : Starting log scan for: logs/application.log
+2026-06-07T17:38:00.018+05:30  INFO 7973 --- [log-scanner] [scheduling-1] c.logscanner.service.LogScannerService   : Scanned [logs/application.log] — found 5 error(s)
+2026-06-07T17:38:05.773+05:30  INFO 7973 --- [log-scanner] [scheduling-1] com.logscanner.service.EmailService      : Alert email sent to somiljain.cse25@jecrc.ac.in
+2026-06-07T17:39:00.007+05:30  INFO 7973 --- [log-scanner] [scheduling-1] c.logscanner.scheduler.LogScanScheduler  : Starting log scan for: logs/application.log
+2026-06-07T17:39:00.012+05:30  INFO 7973 --- [log-scanner] [scheduling-1] c.logscanner.service.LogScannerService   : Scanned [logs/application.log] — found 5 error(s)
+2026-06-07T17:39:04.714+05:30  INFO 7973 --- [log-scanner] [scheduling-1] com.logscanner.service.EmailService      : Alert email sent to somiljain.cse25@jecrc.ac.in
+2026-06-07T17:50:01.561+05:30  INFO 7973 --- [log-scanner] [scheduling-1] c.logscanner.scheduler.LogScanScheduler  : Starting log scan for: logs/application.log
+2026-06-07T17:50:01.574+05:30  INFO 7973 --- [log-scanner] [scheduling-1] c.logscanner.service.LogScannerService   : Scanned [logs/application.log] — found 5 error(s)
+2026-06-07T17:50:06.172+05:30  INFO 7973 --- [log-scanner] [scheduling-1] com.logscanner.service.EmailService      : Alert email sent to somiljain.cse25@jecrc.ac.in
+2026-06-07T17:50:17.409+05:30  INFO 7973 --- [log-scanner] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-07T17:50:17.418+05:30  INFO 7973 --- [log-scanner] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
