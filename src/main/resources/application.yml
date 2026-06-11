@@ -1,9 +1,22 @@
 spring:
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/logscanner?createDatabaseIfNotExist=true
+    username: root
+    password: Somil@123         # ← your MySQL password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jpa:
+      hibernate:
+        ddl-auto: update             # auto creates tables
+      show-sql: true
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQLDialect
   mail:
     host: smtp.gmail.com
     port: 587
     username: chotepyare1234@gmail.com        # ← replace
-    password: ****         # ← use Gmail App Password
+    password: tsjmskncpcsoiqkg      # ← use Gmail App Password
 
 
 logging:

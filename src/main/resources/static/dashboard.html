@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Log Scanner Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+          font-family: 'Segoe UI', sans-serif;
+          background: #0f172a;
+          color: #e2e8f0;
+          min-height: 100vh;
+        }
+
+        /* ── HEADER ── */
+        .header {
+          background: linear-gradient(135deg, #1e293b, #0f172a);
+          border-bottom: 1px solid #334155;
+          padding: 20px 30px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .header h1 { font-size: 22px; color: #f1f5f9; }
+        .header h1 span { color: #f87171; }
+        .last-updated { font-size: 12px; color: #64748b; }
+
+        /* ── LAYOUT ── */
+        .container { padding: 30px; max-width: 1400px; margin: auto; }
+
+        /* ── STAT CARDS ── */
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 20px;
+          margin-bottom: 30px;
+        }
+        .stat-card {
+          background: #1e293b;
+          border: 1px solid #334155;
+          border-radius: 12px;
+          padding: 20px;
+          text-align: center;
+          transition: transform 0.2s;
+        }
+        .stat-card:hover { transform: translateY(-3px); }
+        .stat-card .number {
+          font-size: 42px;
+          font-weight: 700;
+          margin-bottom: 5px;
+        }
+        .stat-card .label { font-size: 13px; color: #94a3b8; }
+        .total   .number { color: #60a5fa; }
+        .fatal   .number { color: #f87171; }
+        .error   .number { color: #fb923c; }
+        .recent  .number { color: #34d399; }
+
+        /* ── CHARTS ── */
+        .charts-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+          margin-bottom: 30px;
+        }
+        .chart-card {
+          background: #1e293b;
+          border: 1px solid #334155;
+          border-radius: 12px;
+          padding: 20px;
+        }
+        .chart-card h3 {
+          font-size: 14px;
+          color: #94a3b8;
+          margin-bottom: 15px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+        .chart-wrapper { position: relative; height: 220px; }
+
+        /* ── TABLE ── */
+        .table-card {
+          background: #1e293b;
+          border: 1px solid #334155;
+          border-radius: 12px;
+          padding: 20px;
+          margin-bottom: 30px;
+        }
+        .table-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 15px;
+        }
+        .table-header h3 { font-size: 16px; color: #f1f5f9; }
+
+        /* Filter buttons */
+        .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+        .filter-btn {
+          padding: 6px 14px;
+          border-radius: 20px;
+          border: 1px solid #334155;
+          background: #0f172a;
+          color: #94a3b8;
+          cursor: pointer;
+          font-size: 12px;
+          transition: all 0.2s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+          background: #3b82f6;
+          color: white;
+          border-color: #3b82f6;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th {
+          text-align: left;
+          padding: 10px 12px;
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: #64748b;
+          border-bottom: 1px solid #334155;
+        }
+        td {
+          padding: 12px;
+          border-bottom: 1px solid #1e293b;
+          font-size: 13px;
+          vertical-align: top;
+        }
+        tr:hover td { background: #0f172a; }
+
+        /* Severity badge */
+        .badge {
+          display: inline-block;
+          padding: 3px 10px;
+          border-radius: 20px;
+          font-size: 11px;
+          font-weight: 700;
+        }
+        .badge-ERROR { background: #7c2d12; color: #fb923c; }
+        .badge-FATAL { background: #4c0519; color: #f87171; }
+
+        /* Email badge */
+        .email-yes { color: #34d399; font-size: 12px; }
+        .email-no  { color: #64748b; font-size: 12px; }
+
+        /* Root cause */
+        .root-cause {
+          background: #fef9c3;
+          color: #713f12;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          display: inline-block;
+          max-width: 300px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        /* Stack trace toggle */
+        .stack-btn {
+          background: none;
+          border: 1px solid #334155;
+          color: #60a5fa;
+          padding: 2px 8px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 11px;
+        }
+        .stack-trace {
+          display: none;
+          background: #0f172a;
+          color: #94a3b8;
+          padding: 8px;
+          border-radius: 4px;
+          font-size: 11px;
+          margin-top: 6px;
+          white-space: pre-wrap;
+          max-height: 150px;
+          overflow-y: auto;
+        }
+
+        /* Refresh button */
+        .refresh-btn {
+          background: #3b82f6;
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 8px;
+          cursor: pointer;
+          font-size: 13px;
+          transition: background 0.2s;
+        }
+        .refresh-btn:hover { background: #2563eb; }
+
+        /* Empty state */
+        .empty {
+          text-align: center;
+          padding: 40px;
+          color: #475569;
+        }
+
+        /* Loading */
+        .loading {
+          text-align: center;
+          padding: 40px;
+          color: #475569;
+          font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+          .charts-grid { grid-template-columns: 1fr; }
+          .container { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>🔍 Log Scanner <span>Dashboard</span></h1>
+    <span class="last-updated" id="lastUpdated">Loading...</span>
+</div>
+
+<div class="container">
+
+    <!-- STAT CARDS -->
+    <div class="stats-grid">
+        <div class="stat-card total">
+            <div class="number" id="totalErrors">—</div>
+            <div class="label">Total Errors</div>
+        </div>
+        <div class="stat-card fatal">
+            <div class="number" id="fatalCount">—</div>
+            <div class="label">FATAL Errors</div>
+        </div>
+        <div class="stat-card error">
+            <div class="number" id="errorCount">—</div>
+            <div class="label">ERROR Errors</div>
+        </div>
+        <div class="stat-card recent">
+            <div class="number" id="last24Hours">—</div>
+            <div class="label">Last 24 Hours</div>
+        </div>
+    </div>
+
+    <!-- CHARTS -->
+    <div class="charts-grid">
+        <div class="chart-card">
+            <h3>📊 Errors by Type</h3>
+            <div class="chart-wrapper">
+                <canvas id="errorTypeChart"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <h3>🎯 Errors by Severity</h3>
+            <div class="chart-wrapper">
+                <canvas id="severityChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ERRORS TABLE -->
+    <div class="table-card">
+        <div class="table-header">
+            <h3>🚨 Error Log</h3>
+            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                <div class="filters">
+                    <button class="filter-btn active" onclick="filterErrors('ALL', this)">All</button>
+                    <button class="filter-btn" onclick="filterErrors('ERROR', this)">ERROR</button>
+                    <button class="filter-btn" onclick="filterErrors('FATAL', this)">FATAL</button>
+                </div>
+                <button class="refresh-btn" onclick="loadDashboard()">🔄 Refresh</button>
+            </div>
+        </div>
+
+        <div id="tableContainer">
+            <div class="loading">Loading errors...</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const API = 'http://localhost:8080/api/dashboard';
+    let allErrors = [];
+    let errorTypeChart, severityChart;
+
+    // ── Load everything ──────────────────────────────
+    async function loadDashboard() {
+      await Promise.all([loadStats(), loadErrors()]);
+      document.getElementById('lastUpdated').textContent =
+        'Last updated: ' + new Date().toLocaleTimeString();
+    }
+
+    // ── Load stats + charts ──────────────────────────
+    async function loadStats() {
+      try {
+        const res  = await fetch(`${API}/stats`);
+        const data = await res.json();
+
+        document.getElementById('totalErrors').textContent = data.totalErrors  || 0;
+        document.getElementById('fatalCount').textContent  = data.fatalCount   || 0;
+        document.getElementById('errorCount').textContent  = data.errorCount   || 0;
+        document.getElementById('last24Hours').textContent = data.last24Hours  || 0;
+
+        renderErrorTypeChart(data.byErrorType  || {});
+        renderSeverityChart(data.bySeverity    || {});
+      } catch (e) {
+        console.error('Stats error:', e);
+      }
+    }
+
+    // ── Load errors table ────────────────────────────
+    async function loadErrors() {
+      try {
+        const res = await fetch(`${API}/errors`);
+        allErrors = await res.json();
+        renderTable(allErrors);
+      } catch (e) {
+        document.getElementById('tableContainer').innerHTML =
+          '<div class="empty">⚠️ Could not load errors. Is the server running?</div>';
+      }
+    }
+
+    // ── Filter table ─────────────────────────────────
+    function filterErrors(severity, btn) {
+      document.querySelectorAll('.filter-btn')
+              .forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filtered = severity === 'ALL'
+        ? allErrors
+        : allErrors.filter(e => e.severity === severity);
+      renderTable(filtered);
+    }
+
+    // ── Render errors table ──────────────────────────
+    function renderTable(errors) {
+      if (!errors || errors.length === 0) {
+        document.getElementById('tableContainer').innerHTML =
+          '<div class="empty">✅ No errors found!</div>';
+        return;
+      }
+
+      const rows = errors.map((e, i) => `
+        <tr>
+          <td>${e.id}</td>
+          <td><span class="badge badge-${e.severity}">${e.severity}</span></td>
+          <td><strong>${e.errorType}</strong></td>
+          <td>Line ${e.lineNumber}</td>
+          <td>
+            <span class="root-cause" title="${e.rootCause}">${e.rootCause}</span>
+          </td>
+          <td>
+            <button class="stack-btn" onclick="toggleStack(${i})">
+              View Stack
+            </button>
+            <div class="stack-trace" id="stack-${i}">${e.stackTrace || 'N/A'}</div>
+          </td>
+          <td style="font-size:11px; color:#64748b;">
+            ${new Date(e.scannedAt).toLocaleString()}
+          </td>
+          <td>
+            ${e.emailSent
+              ? '<span class="email-yes">✅ Sent</span>'
+              : '<span class="email-no">⏳ Pending</span>'}
+          </td>
+        </tr>
+      `).join('');
+
+      document.getElementById('tableContainer').innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Severity</th>
+              <th>Error Type</th>
+              <th>Line</th>
+              <th>Root Cause</th>
+              <th>Stack Trace</th>
+              <th>Scanned At</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
+    // ── Toggle stack trace ───────────────────────────
+    function toggleStack(i) {
+      const el = document.getElementById(`stack-${i}`);
+      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // ── Error Type Chart ─────────────────────────────
+    function renderErrorTypeChart(data) {
+      const ctx = document.getElementById('errorTypeChart').getContext('2d');
+      if (errorTypeChart) errorTypeChart.destroy();
+
+      errorTypeChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(data),
+          datasets: [{
+            label: 'Count',
+            data: Object.values(data),
+            backgroundColor: [
+              '#3b82f6','#f87171','#fb923c',
+              '#34d399','#a78bfa','#f472b6'
+            ],
+            borderRadius: 6,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } },
+            y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } }
+          }
+        }
+      });
+    }
+
+    // ── Severity Chart ───────────────────────────────
+    function renderSeverityChart(data) {
+      const ctx = document.getElementById('severityChart').getContext('2d');
+      if (severityChart) severityChart.destroy();
+
+      severityChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(data),
+          datasets: [{
+            data: Object.values(data),
+            backgroundColor: ['#fb923c', '#f87171', '#fbbf24'],
+            borderWidth: 0,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { color: '#94a3b8', padding: 15 }
+            }
+          }
+        }
+      });
+    }
+
+    // ── Auto refresh every 60 seconds ────────────────
+    loadDashboard();
+    setInterval(loadDashboard, 60000);
+</script>
+</body>
+</html>
